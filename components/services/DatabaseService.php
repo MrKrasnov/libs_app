@@ -14,6 +14,16 @@ class DatabaseService
         $this->query = new Query();
     }
 
+    public function getDataBookById(int $id)
+    {
+        $data = $this->query
+            ->select('*')
+            ->from('book')
+            ->where(['id' => $id])
+            ->one();
+        return $data;
+    }
+
     /**
      * Получаем общую информацию о книгах, авторах книги и жанре
      *

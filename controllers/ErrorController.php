@@ -6,7 +6,7 @@ use yii\web\Controller;
 
 class ErrorController extends Controller
 {
-    public function actions()
+    public function actions(): array
     {
         return [
             'error' => [

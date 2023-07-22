@@ -58,7 +58,7 @@ function renderBookCards(array $booksData) : string
                     <p class='card-text'><b>genres:</b> <i>$categories</i></p>
                     <p class='card-text'><b>authors:</b> <i>$authors</i></p>
                     <div class='d-flex justify-content-between align-items-center'>
-                         <a href='site/index&id=$id' class='btn btn-outline-secondary btn-sm'>more</a>
+                         <a href='book/page?id=$id' class='btn btn-outline-secondary btn-sm'>more</a>
                          <span class='small text-right'>#$id</span>
                      </div>
                 </div>

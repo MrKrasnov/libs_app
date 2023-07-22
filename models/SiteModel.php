@@ -4,7 +4,6 @@ namespace app\models;
 
 use Yii;
 use yii\base\Model;
-use yii\web\Request;
 
 class SiteModel extends Model
 {
