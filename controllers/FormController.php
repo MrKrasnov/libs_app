@@ -16,4 +16,22 @@ class FormController extends Controller
 
         return $this->render('form', $vars);
     }
+
+    public function actionAddCategory() : string
+    {
+        $model = new FormModel;
+
+        $vars  = [];
+
+        return $this->render('resultPage', $vars);
+    }
+
+    public function actionAddAuthor() : string
+    {
+        $model = new FormModel;
+
+        $vars  = [];
+
+        return $this->render('resultPage', $vars);
+    }
 }

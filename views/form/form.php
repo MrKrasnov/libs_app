@@ -2,25 +2,29 @@
 
 /** @var yii\web\View $this */
 
+use yii\helpers\Html;
+
 $this->title = 'Forms add notes';
 ?>
 
 <div class="container">
-    <form>
+    <form action="/form/add-category" method="POST">
         <h3>Form for Category</h3>
         <div class="form-group">
-            <label for="categories">Categories:</label>
+            <label for="categories">Category:</label>
             <input type="text" class="form-control shadow" id="categories" name="categories" placeholder="Enter Category" required>
         </div>
+        <?= Html::hiddenInput(Yii::$app->request->csrfParam, Yii::$app->request->getCsrfToken()) ?>
         <button type="submit" class="btn btn-primary shadow">Add a Category</button>
     </form>
 
-    <form class="mt-5">
+    <form class="mt-5" action="/form/add-author" method="POST">
         <h3>Form for Author</h3>
         <div class="form-group">
             <label for="authors">Author:</label>
             <input type="text" class="form-control shadow" id="authors" name="authors" placeholder="Enter Author" required>
         </div>
+        <?= Html::hiddenInput(Yii::$app->request->csrfParam, Yii::$app->request->getCsrfToken()) ?>
         <button type="submit" class="btn btn-primary shadow">Add a Author</button>
     </form>
 
@@ -38,7 +42,7 @@ $this->title = 'Forms add notes';
         <div class="form-group">
             <div class="row">
                 <div class='col-md-6'>
-                    <label>Choose Category:</label>
+                    <label>Choose Categories:</label>
                         <?php
                             if(empty($categories)) {
                                 echo
@@ -81,6 +85,7 @@ $this->title = 'Forms add notes';
                 </div>
             </div>
         </div>
+        <?= Html::hiddenInput(Yii::$app->request->csrfParam, Yii::$app->request->getCsrfToken()) ?>
         <button type="submit" class="btn btn-primary"
             <?php if(empty($categories) || empty($authors)){ echo "disabled";}?>
         >
