@@ -5,12 +5,11 @@
 $this->title = 'Forms add notes';
 ?>
 
-<div class="container mt-5">
-
+<div class="container">
     <form>
         <h3>Form for Category</h3>
         <div class="form-group">
-            <label for="categories">Category:</label>
+            <label for="categories">Categories:</label>
             <input type="text" class="form-control shadow" id="categories" name="categories" placeholder="Enter Category" required>
         </div>
         <button type="submit" class="btn btn-primary shadow">Add a Category</button>
