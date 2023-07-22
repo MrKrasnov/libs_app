@@ -2,6 +2,8 @@
 
 /** @var yii\web\View $this */
 
+use yii\helpers\Url;
+
 $this->title = 'Library';
 ?>
 <div class="container">
@@ -44,7 +46,7 @@ function renderBookCards(array $booksData) : string
     foreach ($booksData as $bookData) {
         $id         = $bookData['book_id'];
         $title      = $bookData['title'];
-        $img        = $bookData['img'];
+        $img        = Url::to('@web/' . $bookData['img']);
         $authors    = $bookData['authors'];
         $categories = $bookData['categories'];
 

@@ -2,12 +2,14 @@
 
 /** @var yii\web\View $this */
 
+use yii\helpers\Url;
+
 $this->title = $title;
 ?>
 <div class="site-index">
     <div class="row">
         <div class="col-md-6">
-            <img src="<?php echo $img ?>" alt="Book Img" class="img-fluid">
+            <img style="max-height: 750px" src="<?php echo Url::to('@web/'.$img) ?>" alt="Book Img" class="img-fluid">
         </div>
         <div class="col-md-6">
             <h2><?php echo $title ?></h2>
@@ -26,13 +28,8 @@ $this->title = $title;
                 echo "<h5>updated at:</h5><p>$updated_at</p>";
             }
 
-            if(isset($deleted_at)) {
-                echo "<h5>deleted at:</h5><p>$deleted_at</p>";
-            }
-
             ?>
             <button class="btn btn-primary">Change Data</button>
         </div>
     </div>
-</div>
 </div>
