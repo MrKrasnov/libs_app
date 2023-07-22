@@ -14,7 +14,6 @@ $config = [
     'name' => 'Web Library',
     'components' => [
         'request' => [
-            // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => '4O6HObe5VibJcpBQ1MtDOm6y4C3tPjRh',
         ],
         'cache' => [
@@ -39,18 +38,6 @@ $config = [
                 ],
             ],
         ],
-        'user' => [
-            'identityClass' => 'app\models\User',
-            'enableAutoLogin' => true,
-        ],
-        /*
-        'mailer' => [
-            'class' => \yii\symfonymailer\Mailer::class,
-            'viewPath' => '@app/mail',
-            // send all mails to a file by default.
-            'useFileTransport' => true,
-        ],
-        */
     ],
     'params' => $params,
 ];
