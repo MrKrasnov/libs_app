@@ -38,6 +38,9 @@ $config = [
                 ],
             ],
         ],
+        'DatabaseService' => [
+            'class' => 'app\components\services\DatabaseService',
+        ]
     ],
     'params' => $params,
 ];

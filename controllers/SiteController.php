@@ -2,7 +2,7 @@
 
 namespace app\controllers;
 
-use Yii;
+use app\models\SiteModel;
 use yii\web\Controller;
 
 class SiteController extends Controller
@@ -12,8 +12,14 @@ class SiteController extends Controller
      *
      * @return string
      */
-    public function actionIndex()
+    //TODO добавить фильтры при передаче в get запрос категорий или авторов
+    //  это нужно в дальнейшем для поиска
+    public function actionIndex(): string
     {
-        return $this->render('index');
+        $model = new SiteModel;
+
+        $vars = $model->getBooksForIndexPage();
+
+        return $this->render('index', $vars);
     }
 }

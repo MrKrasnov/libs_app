@@ -86,3 +86,9 @@ a.desc:after {
 .form-group {
     margin-bottom: 1rem;
 }
+
+.card-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
