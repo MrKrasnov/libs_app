@@ -5,6 +5,29 @@
 $this->title = 'Library';
 ?>
 <div class="container">
+    <div class="mt-1 mb-4">
+        <div class="col-md-12">
+            <form class="form-inline">
+                <div class="form-group row">
+                    <div class="col-md-9">
+                        <input type="text" class="form-control shadow" id="searchInput" placeholder="Type in the name">
+                    </div>
+                    <div class="col-md-2">
+                        <select class="form-control selectpicker shadow" data-live-search="true">
+                            <option>Опция 1</option>
+                            <option>Опция 2</option>
+                            <option>Опция 3</option>
+                            <option>Опция 4</option>
+                            <option>Опция 5</option>
+                        </select>
+                    </div>
+                    <div class="col-md-1">
+                        <button type="submit" class="btn btn-primary shadow">Search</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
     <div class="row">
         <?php
            echo renderBookCards($booksData);
@@ -30,10 +53,10 @@ function renderBookCards(array $booksData) : string
         $booksCards .=
         "
         <div class='col-md-3 mb-4'>
-            <div class='card'>
+            <div class='card shadow'>
                 <div class='card-body'>
                     <h5 class='card-title'>$title</h5>
-                    <img class='card-img' src='$img' alt='book-img'>
+                    <img class='card-img' style='height: 420px;' src='$img' alt='book-img'>
                     <p class='card-text'><b>genres:</b> <i>$categories</i></p>
                     <p class='card-text'><b>authors:</b> <i>$authors</i></p>
                     <div class='d-flex justify-content-between align-items-center'>

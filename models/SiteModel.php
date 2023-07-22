@@ -15,7 +15,7 @@ class SiteModel extends Model
         foreach ($booksData as $index => $bookData) {
             $img = $bookData['img'] ?? null;
 
-            if(!isset($img)) {
+            if(!isset($img) || $index === 0) {
                 $bookData['img'] = "img/no-available.jpg";
             }else if(!file_exists($img)) {
                 $bookData['img'] = "img/no-available.jpg";
