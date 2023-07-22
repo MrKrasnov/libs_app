@@ -7,22 +7,20 @@ $this->title = 'Library';
 <div class="container">
     <div class="mt-1 mb-4">
         <div class="col-md-12">
-            <form class="form-inline">
+            <form action="/site/index" class="form-inline">
                 <div class="form-group row">
                     <div class="col-md-9">
-                        <input type="text" class="form-control shadow" id="searchInput" placeholder="Type in the name">
+                        <input type="text" name='name-search' class="form-control shadow" id="searchInput" placeholder="Type in the name">
                     </div>
                     <div class="col-md-2">
-                        <select class="form-control selectpicker shadow" data-live-search="true">
-                            <option>Опция 1</option>
-                            <option>Опция 2</option>
-                            <option>Опция 3</option>
-                            <option>Опция 4</option>
-                            <option>Опция 5</option>
+                        <select name="category" class="form-control selectpicker shadow" data-live-search="true">
+                            <option>Name Book</option>
+                            <option>Genre</option>
+                            <option>Author</option>
                         </select>
                     </div>
                     <div class="col-md-1">
-                        <button type="submit" class="btn btn-primary shadow">Search</button>
+                        <button id="submit-search" type="submit" class="btn btn-primary shadow">Search</button>
                     </div>
                 </div>
             </form>
@@ -39,7 +37,7 @@ $this->title = 'Library';
 function renderBookCards(array $booksData) : string
 {
     if(empty($booksData)) {
-        return "";
+        return "<p>You don't have any books in your web library yet</p>";
     }
 
     $booksCards = "";

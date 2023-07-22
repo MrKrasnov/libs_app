@@ -12,8 +12,6 @@ class SiteController extends Controller
      *
      * @return string
      */
-    //TODO добавить фильтры при передаче в get запрос категорий или авторов
-    //  это нужно в дальнейшем для поиска
     public function actionIndex(): string
     {
         $model = new SiteModel;
