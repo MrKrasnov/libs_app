@@ -1,5 +1,9 @@
 <?php
 
+use yii\caching\FileCache;
+use yii\log\FileTarget;
+use app\components\services\DatabaseService;
+
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
@@ -17,7 +21,7 @@ $config = [
             'cookieValidationKey' => '4O6HObe5VibJcpBQ1MtDOm6y4C3tPjRh',
         ],
         'cache' => [
-            'class' => 'yii\caching\FileCache',
+            'class' => FileCache::class,
         ],
         'errorHandler' => [
             'errorAction' => 'error/error',
@@ -33,14 +37,14 @@ $config = [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
                 [
-                    'class' => 'yii\log\FileTarget',
+                    'class' => FileTarget::class,
                     'levels' => ['error', 'warning'],
                     'logFile' => '@runtime/logs/app.log',
                 ],
             ],
         ],
         'DatabaseService' => [
-            'class' => 'app\components\services\DatabaseService',
+            'class' => DatabaseService::class,
         ]
     ],
     'params' => $params,

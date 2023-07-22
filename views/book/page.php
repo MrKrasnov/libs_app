@@ -27,7 +27,6 @@ $this->title = $title;
             if(isset($updated_at)) {
                 echo "<h5>updated at:</h5><p>$updated_at</p>";
             }
-
             ?>
             <button class="btn btn-primary">Change Data</button>
         </div>

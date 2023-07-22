@@ -39,7 +39,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav'],
         'items' => [
-            ['label' => 'Add Book', 'url' => ['/form-book/view-form']],
+            ['label' => 'Add Notes', 'url' => ['/form/view-form']],
         ]
     ]);
     NavBar::end();

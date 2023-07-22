@@ -62,6 +62,26 @@ class DatabaseService
         return $data;
     }
 
+    public function getAllCategory() : array
+    {
+        $data = $this->query
+            ->select('*')
+            ->from('category')
+            ->all();
+
+        return $data;
+    }
+
+    public function getAllAuthors() : array
+    {
+        $data = $this->query
+            ->select('*')
+            ->from('author')
+            ->all();
+
+        return $data;
+    }
+
     /**
      * делаем where на основе фильтра
      *

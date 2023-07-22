@@ -5,8 +5,9 @@ namespace app\models;
 use Yii;
 use yii\base\InvalidArgumentException;
 use yii\base\InvalidConfigException;
+use yii\base\Model;
 
-class BookModel extends \yii\base\Model
+class BookModel extends Model
 {
     public function getBookInfo() : array
     {
