@@ -20,6 +20,7 @@ class DatabaseService
             ->select('*')
             ->from('book')
             ->where(['id' => $id])
+            ->andWhere(['deleted_at' => null])
             ->one();
         return $data;
     }
@@ -52,6 +53,7 @@ class DatabaseService
             ->join('INNER JOIN', 'author', 'books_authors.authors_id = author.id')
             ->join('INNER JOIN', 'category', 'books_categories.categories_id = category.id')
             ->where($arrayWhere)
+            ->andWhere(['deleted_at' => null])
             ->groupBy('book.id')
             ->orderBy(['book.id' => SORT_DESC])
             ->limit($limit)
