@@ -2,6 +2,8 @@
 
 namespace app\components\services;
 
+use app\dto\BookDTO;
+use yii\db\Transaction;
 use Yii;
 use yii\db\Exception;
 use yii\db\Query;
@@ -49,10 +51,10 @@ class DatabaseService
                 'GROUP_CONCAT(DISTINCT category.name SEPARATOR ", ") AS categories',
             ])
             ->from('book')
-            ->join('INNER JOIN', 'books_authors', 'book.id = books_authors.books_id')
-            ->join('INNER JOIN', 'books_categories', 'book.id = books_categories.books_id')
-            ->join('INNER JOIN', 'author', 'books_authors.authors_id = author.id')
-            ->join('INNER JOIN', 'category', 'books_categories.categories_id = category.id')
+            ->join('LEFT JOIN', 'books_authors', 'book.id = books_authors.books_id')
+            ->join('LEFT JOIN', 'author', 'books_authors.authors_id = author.id')
+            ->join('LEFT JOIN', 'books_categories', 'book.id = books_categories.books_id')
+            ->join('LEFT JOIN', 'category', 'books_categories.categories_id = category.id')
             ->where($arrayWhere)
             ->andWhere(['deleted_at' => null])
             ->groupBy('book.id')
@@ -105,6 +107,52 @@ class DatabaseService
             ->execute();
 
         return $resultInsert > 0;
+    }
+
+    public function addBook(BookDTO $bookDTO) : bool
+    {
+        $db = Yii::$app->db;
+        $bookData = $bookDTO->toArray();
+
+        //использую транзакцию чтобы в случае ошибки откатить изменения
+        $transaction =  $db->beginTransaction();
+
+        if ($transaction === null) {
+            throw new Exception("Ошибка старта транзакции при добавлении записи для книги");
+        }
+
+        try {
+             $db->createCommand()->insert('book', [
+                'title'       => $bookData['title'],
+                'description' => $bookData['description'],
+                'img'         => $bookData['img']
+            ])->execute();
+
+            $bookId = $db->getLastInsertID();
+
+            foreach ($bookData['categories'] as $category) {
+                $db->createCommand()->insert('books_categories', [
+                    'books_id'      => $bookId,
+                    'categories_id' => $category,
+                ])->execute();
+            }
+
+            foreach ($bookData['authors'] as $author) {
+                $db->createCommand()->insert('books_authors', [
+                    'books_id'      => $bookId,
+                    'authors_id'    => $author,
+                ])->execute();
+            }
+
+            $transaction->commit();
+            return true;
+        } catch (\Exception $e) {
+            $transaction->rollBack();
+            throw $e;
+        }
+
+        Yii::error('При Добавлении книги скрипт обошел конструкцию Try Catch такого не должно быть!');
+        return false;
     }
 
     /**

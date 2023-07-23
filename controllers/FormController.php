@@ -7,7 +7,6 @@ use yii\web\Controller;
 
 class FormController extends Controller
 {
-
     public function actionViewForm(): string
     {
         $model = new FormModel;
@@ -28,9 +27,18 @@ class FormController extends Controller
 
     public function actionAddAuthor() : string
     {
-        $model = new FormModel;
+        $model      = new FormModel;
 
         $resultAdd  = $model->addAuthor();
+
+        return $this->render('resultPage', $resultAdd);
+    }
+
+    public function actionAddBook()
+    {
+        $model      = new FormModel;
+
+        $resultAdd  = $model->addBook();
 
         return $this->render('resultPage', $resultAdd);
     }

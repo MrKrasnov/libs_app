@@ -30,9 +30,19 @@ class SiteModel extends Model
             $booksData = Yii::$app->DatabaseService->getBasicDataBooks(20);
         }
 
-        //проверим есть ли изображение в директории или не равняется ли null
+        //проверим данные для книг
         foreach ($booksData as $index => $bookData) {
-            $img = $bookData['img'] ?? null;
+            $img        = $bookData['img'] ?? null;
+            $categories = $bookData['categories'] ?? null;
+            $authors    = $bookData['authors'] ?? null;
+
+            if(!isset($categories)) {
+                $bookData['categories'] = 'empty';
+            }
+
+            if(!isset($authors)) {
+                $bookData['authors'] = 'empty';
+            }
 
             if(!isset($img)) {
                 $bookData['img'] = "img/no-available.jpg";

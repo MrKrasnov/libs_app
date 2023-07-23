@@ -29,7 +29,7 @@ $this->title = 'Forms add notes';
     </form>
 
     <!-- Форма для книг -->
-    <form class="mt-5">
+    <form action="/form/add-book" method="POST" class="mt-5" enctype="multipart/form-data">
         <h3>Form for book</h3>
         <div class="form-group">
             <label for="bookTitle">Name Book:</label>
@@ -38,6 +38,9 @@ $this->title = 'Forms add notes';
         <div class="form-group">
             <label for="bookDescription">Description book:</label>
             <textarea class="form-control shadow" id="bookDescription" name="bookDescription" rows="4" placeholder="Enter Description Book" required></textarea>
+        </div>
+        <div class= form-group">
+             <input type="file" class="form-control-file" id="imageInput" name="image">
         </div>
         <div class="form-group">
             <div class="row">
@@ -52,7 +55,7 @@ $this->title = 'Forms add notes';
                                 </div>
                                 ';
                             } else {
-                                echo "<select class='form-control col-md-6 shadow' name='categories' multiple required>";
+                                echo "<select class='form-control col-md-6 shadow' name='categories[]' multiple required>";
                                 foreach ($categories as $category) {
                                     $value = $category['name'];
                                     $id    = $category['id'];
@@ -71,9 +74,9 @@ $this->title = 'Forms add notes';
                                 <div class="alert alert-danger mt-3 shadow">
                                   You need to add a author
                                 </div>
-                                ';
+                            ';
                         } else {
-                            echo "<select class='form-control col-md-6 shadow' name='authors' multiple required>";
+                            echo "<select class='form-control col-md-6 shadow' name='authors[]' multiple required>";
                             foreach ($authors as $author) {
                                 $value = $author['name'];
                                 $id    = $author['id'];

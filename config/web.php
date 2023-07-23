@@ -1,7 +1,8 @@
 <?php
 
-use yii\caching\FileCache;
 use yii\log\FileTarget;
+use yii\caching\FileCache;
+use app\components\services\FileService;
 use app\components\services\DatabaseService;
 
 $params = require __DIR__ . '/params.php';
@@ -45,6 +46,9 @@ $config = [
         ],
         'DatabaseService' => [
             'class' => DatabaseService::class,
+        ],
+        'FileService' => [
+            'class' => FileService::class,
         ]
     ],
     'params' => $params,
