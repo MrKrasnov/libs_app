@@ -23,7 +23,8 @@ $this->title = "Update Book $title Form";
         <h3>Change Description</h3>
         <div class="form-group">
             <label for="author">Description:</label>
-            <textarea class="form-control shadow" id="bookDescription" name="bookDescription" rows="4" placeholder="Enter Description Book" required></textarea>
+            <input type="hidden" name="id" value="<?= $id ?>">
+            <textarea class="form-control shadow" id="bookDescription" name="description" rows="4" placeholder="Enter Description Book" required></textarea>
         </div>
         <?= Html::hiddenInput(Yii::$app->request->csrfParam, Yii::$app->request->getCsrfToken()) ?>
         <button type="submit" class="btn btn-primary shadow">Update Description</button>

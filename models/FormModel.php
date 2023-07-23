@@ -164,7 +164,8 @@ class FormModel extends Model
         return $bookData;
     }
 
-    public function updateTitle() {
+    public function updateTitle() : bool
+    {
         $request = Yii::$app->request;
 
         if (!$request->isPost) {
@@ -181,6 +182,27 @@ class FormModel extends Model
         $title = trim($title);
 
         $resultUpdate = Yii::$app->DatabaseService->updateTitleBookById($id, $title);
+        return $resultUpdate;
+    }
+
+    public function updateDescription() : bool
+    {
+        $request = Yii::$app->request;
+
+        if (!$request->isPost) {
+            throw new BadRequestHttpException('Неправильный тип запроса');
+        }
+
+        $id      = $request->post('id');
+        $description   = $request->post('description');
+
+        if(!isset($id, $description)) {
+            throw new InvalidArgumentException('При изменении описания книги не получили необходимые данные из запроса');
+        }
+
+        $description = trim($description);
+
+        $resultUpdate = Yii::$app->DatabaseService->updateDescriptionBookById($id, $description);
         return $resultUpdate;
     }
 

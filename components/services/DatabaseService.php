@@ -158,12 +158,48 @@ class DatabaseService
 
     public function updateTitleBookById(int $id, string $title) : bool
     {
-        $resultInsert = $this->query
-            ->createCommand()
+        $resultInsert =
+            Yii::$app->db->createCommand()
             ->update('book', ['title' => $title], ['id' => $id])
             ->execute();
 
+        $this->updateUpdateDataForBook($id);
+
         return $resultInsert > 0;
+    }
+
+    public function updateDescriptionBookById(int $id, string $description) : bool
+    {
+        $resultInsert =
+            Yii::$app->db->createCommand()
+                ->update('book', ['description' => $description], ['id' => $id])
+                ->execute();
+
+        $this->updateUpdateDataForBook($id);
+
+        return $resultInsert > 0;
+    }
+
+    private function updateUpdateDataForBook($bookId) : bool
+    {
+        $currentDateTime = new Expression('NOW()');
+
+        Yii::$app->db->createCommand()
+            ->update('book', ['updated_at' => $currentDateTime], ['id' => $bookId])
+            ->execute();
+
+        return true;
+    }
+
+    public function deleteBook(int $bookId) : bool
+    {
+        $currentDateTime = new Expression('NOW()');
+
+        Yii::$app->db->createCommand()
+            ->update('book', ['deleted_at' => $currentDateTime], ['id' => $bookId])
+            ->execute();
+
+        return true;
     }
 
     /**
@@ -199,16 +235,5 @@ class DatabaseService
         }
 
         return ['like', $whereColumn, $nameSearch];
-    }
-
-    public function deleteBook(int $bookId) : bool
-    {
-        $currentDateTime = new Expression('NOW()');
-
-        Yii::$app->db->createCommand()
-            ->update('book', ['deleted_at' => $currentDateTime], ['id' => $bookId])
-            ->execute();
-
-        return true;
     }
 }

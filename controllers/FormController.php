@@ -52,10 +52,20 @@ class FormController extends Controller
         return $this->render('resultInsertPage', $resultAdd);
     }
 
-    public function actionUpdateTitle() {
+    public function actionUpdateTitle() : string
+    {
         $model      = new FormModel;
 
         $resultUpdate  = $model->updateTitle();
+
+        return $this->render('resultUpdatePage', ['resultUpdate' => $resultUpdate]);
+    }
+
+    public function actionUpdateDescription() : string
+    {
+        $model      = new FormModel;
+
+        $resultUpdate  = $model->updateDescription();
 
         return $this->render('resultUpdatePage', ['resultUpdate' => $resultUpdate]);
     }

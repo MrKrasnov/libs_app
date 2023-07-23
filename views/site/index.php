@@ -47,6 +47,7 @@ function renderBookCards(array $booksData) : string
         $img        = Url::to('@web/' . $bookData['img']);
         $authors    = $bookData['authors'];
         $categories = $bookData['categories'];
+        $href       = Url::to('@web/' . "book/page?id=$id");
 
         $booksCards .=
         "
@@ -58,7 +59,7 @@ function renderBookCards(array $booksData) : string
                     <p class='card-text'><b>genres:</b> <i>$categories</i></p>
                     <p class='card-text'><b>authors:</b> <i>$authors</i></p>
                     <div class='d-flex justify-content-between align-items-center'>
-                         <a href='book/page?id=$id' class='btn btn-outline-secondary btn-sm'>more</a>
+                         <a href='$href' class='btn btn-outline-secondary btn-sm'>more</a>
                          <span class='small text-right'>#$id</span>
                      </div>
                 </div>
