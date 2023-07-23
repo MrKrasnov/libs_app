@@ -23,9 +23,7 @@ class FormController extends Controller
 
         $resultAdd  = $model->addCategory();
 
-        return $this->render('resultPage', [
-            'resultAdd' => $resultAdd
-        ]);
+        return $this->render('resultPage', $resultAdd);
     }
 
     public function actionAddAuthor() : string
@@ -34,8 +32,6 @@ class FormController extends Controller
 
         $resultAdd  = $model->addAuthor();
 
-        return $this->render('resultPage', [
-            'resultAdd' => $resultAdd
-        ]);
+        return $this->render('resultPage', $resultAdd);
     }
 }

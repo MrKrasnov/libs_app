@@ -18,37 +18,50 @@ class FormModel extends Model
         ];
     }
 
-    public function addCategory() : bool
+    public function addCategory() : array
     {
         $request = Yii::$app->request;
         $category = $request->post('category');
 
         if($category === false) {
             Yii::error('Не правильный запрос, записать категорию не удалось');
-            return false;
+            return [
+                'resultAdd' => false,
+            ];
         }
 
         $category = trim($category);
+        $category = strtolower($category);
 
         $resultAdd = Yii::$app->DatabaseService->addCategory($category);
 
-        return $resultAdd;
+        return [
+            'resultAdd' => $resultAdd,
+            'type'      => 'genre',
+            'value'     => $category,
+        ];
     }
 
-    public function  addAuthor() : bool
+    public function  addAuthor() : array
     {
         $request = Yii::$app->request;
         $author = $request->post('author');
 
         if($author === false) {
             Yii::error('Не правильный запрос, записать автора не удалось');
-            return false;
+            return [
+                'resultAdd' => false,
+            ];
         }
 
         $author = trim($author);
 
         $resultAdd = Yii::$app->DatabaseService->addAuthor($author);
 
-        return $resultAdd;
+        return [
+            'resultAdd' => $resultAdd,
+            'type'      => 'author',
+            'value'     => $author,
+        ];
     }
 }
