@@ -21,17 +21,21 @@ class FormController extends Controller
     {
         $model = new FormModel;
 
-        $vars  = [];
+        $resultAdd  = $model->addCategory();
 
-        return $this->render('resultPage', $vars);
+        return $this->render('resultPage', [
+            'resultAdd' => $resultAdd
+        ]);
     }
 
     public function actionAddAuthor() : string
     {
         $model = new FormModel;
 
-        $vars  = [];
+        $resultAdd  = $model->addAuthor();
 
-        return $this->render('resultPage', $vars);
+        return $this->render('resultPage', [
+            'resultAdd' => $resultAdd
+        ]);
     }
 }

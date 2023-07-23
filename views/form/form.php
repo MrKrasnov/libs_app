@@ -11,8 +11,8 @@ $this->title = 'Forms add notes';
     <form action="/form/add-category" method="POST">
         <h3>Form for Category</h3>
         <div class="form-group">
-            <label for="categories">Category:</label>
-            <input type="text" class="form-control shadow" id="categories" name="categories" placeholder="Enter Category" required>
+            <label for="category">Category:</label>
+            <input type="text" class="form-control shadow" id="category" name="category" placeholder="Enter Category" required>
         </div>
         <?= Html::hiddenInput(Yii::$app->request->csrfParam, Yii::$app->request->getCsrfToken()) ?>
         <button type="submit" class="btn btn-primary shadow">Add a Category</button>
@@ -21,8 +21,8 @@ $this->title = 'Forms add notes';
     <form class="mt-5" action="/form/add-author" method="POST">
         <h3>Form for Author</h3>
         <div class="form-group">
-            <label for="authors">Author:</label>
-            <input type="text" class="form-control shadow" id="authors" name="authors" placeholder="Enter Author" required>
+            <label for="author">Author:</label>
+            <input type="text" class="form-control shadow" id="author" name="author" placeholder="Enter Author" required>
         </div>
         <?= Html::hiddenInput(Yii::$app->request->csrfParam, Yii::$app->request->getCsrfToken()) ?>
         <button type="submit" class="btn btn-primary shadow">Add a Author</button>

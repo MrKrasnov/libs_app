@@ -3,6 +3,7 @@
 namespace app\components\services;
 
 use Yii;
+use yii\db\Exception;
 use yii\db\Query;
 
 class DatabaseService
@@ -80,6 +81,30 @@ class DatabaseService
             ->all();
 
         return $data;
+    }
+
+    public function addAuthor(string $author) : bool
+    {
+        $resultInsert = $this->query
+            ->createCommand()
+            ->insert('author', [
+                'name' => $author,
+            ])
+            ->execute();
+
+        return $resultInsert > 0;
+    }
+
+    public function addCategory(string $category) : bool
+    {
+        $resultInsert = $this->query
+            ->createCommand()
+            ->insert('category', [
+                'name' => $category,
+            ])
+            ->execute();
+
+        return $resultInsert > 0;
     }
 
     /**

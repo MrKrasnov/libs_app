@@ -19,6 +19,8 @@ class SiteModel extends Model
                Yii::warning('Из поискового инпута пришла пустая строка');
                $booksData = Yii::$app->DatabaseService->getBasicDataBooks(20);
            } else {
+               $nameSearch = trim($nameSearch);
+
                $booksData = Yii::$app->DatabaseService->getBasicDataBooks(20, [
                    "category"   => $category,
                    'nameSearch' => $nameSearch
