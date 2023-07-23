@@ -15,18 +15,8 @@ class SiteModel extends Model
 
         //TODO попробовать упростить код
        if(isset($nameSearch, $category)) {
-           if(empty($nameSearch)) {
-               Yii::warning('Из поискового инпута пришла пустая строка');
-               $booksData = Yii::$app->DatabaseService->getBasicDataBooks(20);
-           } else {
-               $nameSearch = trim($nameSearch);
-
-               $booksData = Yii::$app->DatabaseService->getBasicDataBooks(20, [
-                   "category"   => $category,
-                   'nameSearch' => $nameSearch
-               ]);
-           }
-        } else {
+           $booksData = $this->getBooks($nameSearch, $category);
+       } else {
             $booksData = Yii::$app->DatabaseService->getBasicDataBooks(20);
         }
 
@@ -54,5 +44,26 @@ class SiteModel extends Model
         }
 
         return ['booksData' => $booksData];
+    }
+
+    /**
+     * @param mixed $nameSearch
+     * @param mixed $category
+     * @return mixed
+     */
+    private function getBooks(string $nameSearch, string $category) : array
+    {
+        if (empty($nameSearch)) {
+            Yii::warning('Из поискового инпута пришла пустая строка');
+            $booksData = Yii::$app->DatabaseService->getBasicDataBooks(20);
+        } else {
+            $nameSearch = trim($nameSearch);
+
+            $booksData = Yii::$app->DatabaseService->getBasicDataBooks(20, [
+                "category" => $category,
+                'nameSearch' => $nameSearch
+            ]);
+        }
+        return $booksData;
     }
 }

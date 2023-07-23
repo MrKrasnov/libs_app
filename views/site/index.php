@@ -12,7 +12,14 @@ $this->title = 'Library';
             <form action="/site/index" class="form-inline">
                 <div class="form-group row">
                     <div class="col-md-9">
-                        <input type="text" name='name-search' class="form-control shadow" id="searchInput" placeholder="Type in the name" required>
+                        <input type="text" name='name-search'
+                               value="<?php
+                               $request = Yii::$app->request;
+                               $recentSearch = $id = $request->get('name-search', '');
+                               echo $recentSearch;
+                               ?>"
+                               class="form-control shadow" id="searchInput"
+                               placeholder="Type in the name" required>
                     </div>
                     <div class="col-md-2">
                         <select name="category" class="form-control selectpicker shadow" data-live-search="true">
