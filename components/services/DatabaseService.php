@@ -3,6 +3,7 @@
 namespace app\components\services;
 
 use app\dto\BookDTO;
+use yii\db\Expression;
 use yii\db\Transaction;
 use Yii;
 use yii\db\Exception;
@@ -188,5 +189,16 @@ class DatabaseService
         }
 
         return ['like', $whereColumn, $nameSearch];
+    }
+
+    public function deleteBook(int $bookId) : bool
+    {
+        $currentDateTime = new Expression('NOW()');
+
+        Yii::$app->db->createCommand()
+            ->update('book', ['deleted_at' => $currentDateTime], ['id' => $bookId])
+            ->execute();
+
+        return true;
     }
 }

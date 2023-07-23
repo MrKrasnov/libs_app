@@ -79,6 +79,24 @@ class FormModel extends Model
         ];
     }
 
+    public function deleteBook() : bool
+    {
+        $request = Yii::$app->request;
+
+        if (!$request->isPost) {
+            throw new BadRequestHttpException('Неправильный тип запроса');
+        }
+
+        $bookID  = $request->post('id');
+
+        if(!isset($bookID)) {
+            throw new InvalidArgumentException('Ожидали получить Id книги');
+        }
+
+        $resultDelete = Yii::$app->DatabaseService->deleteBook($bookID);
+        return $resultDelete;
+    }
+
     public function addBook() : array
     {
         $request = Yii::$app->request;

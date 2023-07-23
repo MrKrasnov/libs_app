@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\BookModel;
+use Yii;
 use yii\web\Controller;
 
 class BookController extends Controller
@@ -12,6 +13,7 @@ class BookController extends Controller
         $model = new BookModel;
 
         $vars  = $model->getBookInfo();
+        $vars['csrf'] = Yii::$app->request->getCsrfToken();
 
         return $this->render('page', $vars);
     }
