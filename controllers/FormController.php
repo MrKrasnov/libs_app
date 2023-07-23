@@ -7,13 +7,22 @@ use yii\web\Controller;
 
 class FormController extends Controller
 {
-    public function actionViewForm(): string
+    public function actionViewAddForm(): string
     {
         $model = new FormModel;
 
         $vars  = $model->getCategoryAndAuthors();
 
-        return $this->render('form', $vars);
+        return $this->render('addForm', $vars);
+    }
+
+    public function actionViewUpdateForm(): string
+    {
+        $model = new FormModel;
+
+        //$vars = $model->
+
+        return $this->render('updateForm', []);
     }
 
     public function actionAddCategory() : string

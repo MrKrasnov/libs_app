@@ -28,7 +28,7 @@ $this->title = $title;
                 echo "<h5>updated at:</h5><p>$updated_at</p>";
             }
             ?>
-            <a class="btn btn-primary" id="changeData">Change Data</a>
+            <a href="/form/view-update-form?id=<?= $id ?>" class="btn btn-primary" id="changeData">Change Data</a>
             <a class="btn btn-danger" id="removeData">Remove Data</a>
         </div>
     </div>

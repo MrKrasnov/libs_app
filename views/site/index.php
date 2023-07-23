@@ -29,9 +29,7 @@ $this->title = 'Library';
         </div>
     </div>
     <div class="row">
-        <?php
-           echo renderBookCards($booksData);
-        ?>
+        <?php echo renderBookCards($booksData); ?>
     </div>
 </div>
 <?php
