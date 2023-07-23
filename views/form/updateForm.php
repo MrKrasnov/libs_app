@@ -3,12 +3,13 @@
 /** @var yii\web\View $this */
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 $this->title = "Update Book $title Form";
 ?>
 
 <div class="container">
-    <form action="/form/update-title" method="POST">
+    <form action="<?= Url::to(['/form/update', 'type' => 'title']) ?>" method="POST">
         <h3>Change Title</h3>
         <div class="form-group">
             <label for="title">Title - <?= $title ?></label>
@@ -19,7 +20,7 @@ $this->title = "Update Book $title Form";
         <button type="submit" class="btn btn-primary shadow">Update Title</button>
     </form>
 
-    <form class="mt-5" action="/form/update-description" method="POST">
+    <form class="mt-5" action="<?= Url::to(['/form/update', 'type' => 'description']) ?>" method="POST">
         <h3>Change Description</h3>
         <div class="form-group">
             <label for="author">Description:</label>
@@ -30,7 +31,7 @@ $this->title = "Update Book $title Form";
         <button type="submit" class="btn btn-primary shadow">Update Description</button>
     </form>
 
-    <form class="mt-5" action="/form/update-image" method="POST" enctype="multipart/form-data">
+    <form class="mt-5" action="<?= Url::to(['/form/update', 'type' => 'image']) ?>" method="POST" enctype="multipart/form-data">
         <h3>Change Image</h3>
         <div class="mb-3">
             <input type="hidden" name="id" value="<?= $id ?>">
@@ -40,7 +41,7 @@ $this->title = "Update Book $title Form";
         <button type="submit" class="btn btn-primary shadow">Change Image</button>
     </form>
 
-    <form class="mt-5" action="/form/delete-image" method="POST">
+    <form class="mt-5" action="<?= Url::to(['/form/delete', 'type' => 'image']) ?>" method="POST">
         <h3>Delete Image</h3>
         <div class="mb-3">
             <input type="hidden" name="id" value="<?= $id ?>">

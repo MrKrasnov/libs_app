@@ -3,12 +3,13 @@
 /** @var yii\web\View $this */
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 $this->title = 'Forms add notes';
 ?>
 
 <div class="container">
-    <form action="/form/add-category" method="POST">
+    <form action="<?= Url::to(['/form/add', 'type' => 'category']) ?>" method="POST">
         <h3>Form for Category</h3>
         <div class="form-group">
             <label for="category">Category:</label>
@@ -18,7 +19,7 @@ $this->title = 'Forms add notes';
         <button type="submit" class="btn btn-primary shadow">Add a Category</button>
     </form>
 
-    <form class="mt-5" action="/form/add-author" method="POST">
+    <form class="mt-5" action="<?= Url::to(['/form/add', 'type' => 'author']) ?>" method="POST">
         <h3>Form for Author</h3>
         <div class="form-group">
             <label for="author">Author:</label>
@@ -29,7 +30,7 @@ $this->title = 'Forms add notes';
     </form>
 
     <!-- Форма для книг -->
-    <form action="/form/add-book" method="POST" class="mt-5" enctype="multipart/form-data">
+    <form action="<?= Url::to(['/form/add', 'type' => 'book']) ?>" method="POST" class="mt-5" enctype="multipart/form-data">
         <h3>Form for book</h3>
         <div class="form-group">
             <label for="bookTitle">Name Book:</label>

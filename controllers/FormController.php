@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\FormModel;
+use yii\base\InvalidArgumentException;
 use yii\web\Controller;
 
 class FormController extends Controller
@@ -25,75 +26,63 @@ class FormController extends Controller
         return $this->render('updateForm', $vars);
     }
 
-    public function actionAddCategory() : string
+    public function actionAdd(string $type) : string
     {
-        $model = new FormModel;
+        $model      = new FormModel;
 
-        $resultAdd  = $model->addCategory();
+        switch ($type) {
+            case "category":
+                $resultAdd  = $model->addCategory();
+                break;
+            case "author":
+                $resultAdd  = $model->addAuthor();
+                break;
+            case "book":
+                $resultAdd  = $model->addBook();
+                break;
+            default:
+                throw new InvalidArgumentException('Неправильный тип данных для добавления');
+        }
 
         return $this->render('resultInsertPage', $resultAdd);
     }
 
-    public function actionAddAuthor() : string
+    public function actionUpdate(string $type) : string
     {
         $model      = new FormModel;
 
-        $resultAdd  = $model->addAuthor();
-
-        return $this->render('resultInsertPage', $resultAdd);
-    }
-
-    public function actionAddBook(): string
-    {
-        $model      = new FormModel;
-
-        $resultAdd  = $model->addBook();
-
-        return $this->render('resultInsertPage', $resultAdd);
-    }
-
-    public function actionUpdateTitle() : string
-    {
-        $model      = new FormModel;
-
-        $resultUpdate  = $model->updateTitle();
+        switch ($type) {
+            case "title":
+                $resultUpdate  = $model->updateTitle();
+                break;
+            case "description":
+                $resultUpdate  = $model->updateDescription();
+                break;
+            case "image":
+                $resultUpdate  = $model->updateImage();
+                break;
+            default:
+                throw new InvalidArgumentException('Неправильный тип данных для обновления');
+        }
 
         return $this->render('resultUpdatePage', ['resultUpdate' => $resultUpdate]);
     }
 
-    public function actionUpdateDescription() : string
+    public function actionDelete(string $type) : string
     {
         $model      = new FormModel;
 
-        $resultUpdate  = $model->updateDescription();
+        switch ($type) {
+            case "image":
+                $resultDelete  = $model->deleteImage();
+                break;
+            case "book":
+                $resultDelete  = $model->deleteBook();
+                break;
+            default:
+                throw new InvalidArgumentException('Неправильный тип данных для удаления');
+        }
 
-        return $this->render('resultUpdatePage', ['resultUpdate' => $resultUpdate]);
-    }
-
-    public function actionUpdateImage() : string
-    {
-        $model         = new FormModel;
-
-        $resultUpdate  = $model->updateImage();
-
-        return $this->render('resultUpdatePage', ['resultUpdate' => $resultUpdate]);
-    }
-
-    public function actionDeleteImage() : string
-    {
-        $model         = new FormModel;
-
-        $resultDelete  = $model->deleteImage();
-
-        return $this->render('resultDeletePage', ['resultDelete' => $resultDelete, 'type' => 'image']);
-    }
-
-    public function actionDeleteBook(): string
-    {
-        $model         = new FormModel;
-
-        $resultDelete  = $model->deleteBook();
-
-        return $this->render('resultDeletePage', ['resultDelete' => $resultDelete, 'type' => 'book']);
+        return $this->render('resultDeletePage', ['resultDelete' => $resultDelete, 'type' => $type]);
     }
 }

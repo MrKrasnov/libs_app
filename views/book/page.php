@@ -46,7 +46,7 @@ $this->title = $title;
 
         const form = document.createElement("form");
         form.method = "POST";
-        form.action = "/form/delete-book";
+        form.action = "<?= Url::to(['/form/delete', 'type' => 'book']) ?>";
 
         const csrfInput = document.createElement("input");
         csrfInput.type = "hidden";
