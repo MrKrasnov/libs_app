@@ -156,6 +156,16 @@ class DatabaseService
         return false;
     }
 
+    public function updateTitleBookById(int $id, string $title) : bool
+    {
+        $resultInsert = $this->query
+            ->createCommand()
+            ->update('book', ['title' => $title], ['id' => $id])
+            ->execute();
+
+        return $resultInsert > 0;
+    }
+
     /**
      * делаем where на основе фильтра
      *

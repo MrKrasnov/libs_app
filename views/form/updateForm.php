@@ -4,14 +4,15 @@
 
 use yii\helpers\Html;
 
-$this->title = "Update Book ... Form";
+$this->title = "Update Book $title Form";
 ?>
 
 <div class="container">
     <form action="/form/update-title" method="POST">
         <h3>Change Title</h3>
         <div class="form-group">
-            <label for="title">Title - </label>
+            <label for="title">Title - <?= $title ?></label>
+            <input type="hidden" name="id" value="<?= $id ?>">
             <input type="text" class="form-control shadow" id="title" name="title" placeholder="Enter Title" required>
         </div>
         <?= Html::hiddenInput(Yii::$app->request->csrfParam, Yii::$app->request->getCsrfToken()) ?>

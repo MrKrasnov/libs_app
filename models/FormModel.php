@@ -5,6 +5,7 @@ namespace app\models;
 use app\dto\BookDTO;
 use Yii;
 use yii\base\InvalidArgumentException;
+use yii\base\InvalidConfigException;
 use yii\base\Model;
 use yii\web\BadRequestHttpException;
 use yii\web\UploadedFile;
@@ -134,6 +135,53 @@ class FormModel extends Model
             'type'      => 'book',
             'value'     => $title,
         ];
+    }
+
+    public function getBookInfo() : array
+    {
+        $request = Yii::$app->request;
+        $id      = $request->get('id');
+
+        if(!isset($id)) {
+            Yii::error('Не пришел id книги');
+            throw new InvalidArgumentException('Не пришел id книги');
+        }
+
+        $bookData = Yii::$app->DatabaseService->getDataBookById($id);
+
+        if($bookData === false) {
+            throw new InvalidConfigException('Книга с указанным идентификатором не найдена.');
+        }
+
+        $img        = $bookData['img'] ?? null;
+
+        if(!isset($img)) {
+            $bookData['img'] = "img/no-available.jpg";
+        }else if(!file_exists($img)) {
+            $bookData['img'] = "img/no-available.jpg";
+        }
+
+        return $bookData;
+    }
+
+    public function updateTitle() {
+        $request = Yii::$app->request;
+
+        if (!$request->isPost) {
+            throw new BadRequestHttpException('Неправильный тип запроса');
+        }
+
+        $id      = $request->post('id');
+        $title   = $request->post('title');
+
+        if(!isset($id, $title)) {
+            throw new InvalidArgumentException('При изменении заголовка книги не получили необходимые данные из запроса');
+        }
+
+        $title = trim($title);
+
+        $resultUpdate = Yii::$app->DatabaseService->updateTitleBookById($id, $title);
+        return $resultUpdate;
     }
 
     private function isValidImgFile(array $file) : bool

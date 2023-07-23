@@ -25,6 +25,14 @@ class BookModel extends Model
             throw new InvalidConfigException('Книга с указанным идентификатором не найдена.');
         }
 
+        $img        = $bookData['img'] ?? null;
+
+        if(!isset($img)) {
+            $bookData['img'] = "img/no-available.jpg";
+        }else if(!file_exists($img)) {
+            $bookData['img'] = "img/no-available.jpg";
+        }
+
         return $bookData;
     }
 }

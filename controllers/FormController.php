@@ -20,9 +20,9 @@ class FormController extends Controller
     {
         $model = new FormModel;
 
-        //$vars = $model->
+        $vars  = $model->getBookInfo();
 
-        return $this->render('updateForm', []);
+        return $this->render('updateForm', $vars);
     }
 
     public function actionAddCategory() : string
@@ -43,7 +43,7 @@ class FormController extends Controller
         return $this->render('resultInsertPage', $resultAdd);
     }
 
-    public function actionAddBook()
+    public function actionAddBook(): string
     {
         $model      = new FormModel;
 
@@ -52,7 +52,16 @@ class FormController extends Controller
         return $this->render('resultInsertPage', $resultAdd);
     }
 
-    public function actionDeleteBook() {
+    public function actionUpdateTitle() {
+        $model      = new FormModel;
+
+        $resultUpdate  = $model->updateTitle();
+
+        return $this->render('resultUpdatePage', ['resultUpdate' => $resultUpdate]);
+    }
+
+    public function actionDeleteBook(): string
+    {
         $model         = new FormModel;
 
         $resultDelete  = $model->deleteBook();
