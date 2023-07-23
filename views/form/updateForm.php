@@ -33,10 +33,20 @@ $this->title = "Update Book $title Form";
     <form class="mt-5" action="/form/update-image" method="POST" enctype="multipart/form-data">
         <h3>Change Image</h3>
         <div class="mb-3">
-            <input type="file" class="form-control-file" id="bookImage" name="bookImage" required>
+            <input type="hidden" name="id" value="<?= $id ?>">
+            <input type="file" class="form-control-file" id="img" name="img" required>
             <?= Html::hiddenInput(Yii::$app->request->csrfParam, Yii::$app->request->getCsrfToken()) ?>
         </div>
         <button type="submit" class="btn btn-primary shadow">Change Image</button>
+    </form>
+
+    <form class="mt-5" action="/form/delete-image" method="POST">
+        <h3>Delete Image</h3>
+        <div class="mb-3">
+            <input type="hidden" name="id" value="<?= $id ?>">
+            <?= Html::hiddenInput(Yii::$app->request->csrfParam, Yii::$app->request->getCsrfToken()) ?>
+        </div>
+        <button type="submit" class="btn btn-danger shadow">Delete Image</button>
     </form>
 
     <form class="mt-5" action="/form/add-categories-for-book" method="POST">
@@ -100,7 +110,7 @@ $this->title = "Update Book $title Form";
                 </div>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary shadow">Delete Categories</button>
+        <button type="submit" class="btn btn-danger shadow">Delete Categories</button>
     </form>
 
     <form class="mt-5" action="/form/add-authors-for-book" method="POST">
@@ -164,7 +174,7 @@ $this->title = "Update Book $title Form";
                 </div>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary shadow">Delete Authors</button>
+        <button type="submit" class="btn btn-danger shadow">Delete Authors</button>
     </form>
 
 </div>

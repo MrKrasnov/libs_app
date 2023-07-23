@@ -206,6 +206,54 @@ class FormModel extends Model
         return $resultUpdate;
     }
 
+    public function updateImage() : bool
+    {
+        $request = Yii::$app->request;
+
+        if (!$request->isPost) {
+            throw new BadRequestHttpException('Неправильный тип запроса');
+        }
+
+        $id      = $request->post('id');
+
+        if(!isset($id)) {
+            throw new InvalidArgumentException('При изменении изображения книги не получили идентификатор');
+        }
+
+        if( !empty($_FILES['img']) && !empty($_FILES['img']['tmp_name']) ) {
+            $imgPath = $this->uploadImageToServer($_FILES['img']);
+            if(!isset($imgPath)) {
+                Yii::error('Не смогли загрузить изображение на сервер когда обновляли для книги изображение');
+                return false;
+            }
+            $resultUpdate = Yii::$app->DatabaseService->updateImgBookById($id, $imgPath);
+            return $resultUpdate;
+        } else {
+            throw new InvalidArgumentException('При изменении изображения книги не получили файл изображения');
+        }
+
+        Yii::error('При изменении изображения книги скрипт обошел return или исключение, такого быть не должно');
+        return false;
+    }
+
+    public function deleteImage() : bool
+    {
+        $request = Yii::$app->request;
+
+        if (!$request->isPost) {
+            throw new BadRequestHttpException('Неправильный тип запроса');
+        }
+
+        $id      = $request->post('id');
+
+        if(!isset($id)) {
+            throw new InvalidArgumentException('При удалении изображения книги не получили идентификатор');
+        }
+
+        $resultDelete = Yii::$app->DatabaseService->updateImgBookById($id, null);
+        return $resultDelete;
+    }
+
     private function isValidImgFile(array $file) : bool
     {
         $fileType = $file['type'];

@@ -2,6 +2,8 @@
 
 /** @var yii\web\View $this */
 
+use yii\helpers\Url;
+
 $this->title = 'Forms add notes';
 ?>
 <div class="container">
@@ -14,5 +16,5 @@ $this->title = 'Forms add notes';
     }
 
     ?>
-    <a href="/site/index">Back to Home Page</a>
+    <a href="<?= Url::to('@web/' . "site/index") ?>">Back to Home Page</a>
 </div>

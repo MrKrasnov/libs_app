@@ -180,6 +180,18 @@ class DatabaseService
         return $resultInsert > 0;
     }
 
+    public function updateImgBookById(int $id, ?string $imgPath) : bool
+    {
+        $resultInsert =
+            Yii::$app->db->createCommand()
+                ->update('book', ['img' => $imgPath], ['id' => $id])
+                ->execute();
+
+        $this->updateUpdateDataForBook($id);
+
+        return $resultInsert > 0;
+    }
+
     private function updateUpdateDataForBook($bookId) : bool
     {
         $currentDateTime = new Expression('NOW()');

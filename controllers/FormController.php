@@ -70,12 +70,30 @@ class FormController extends Controller
         return $this->render('resultUpdatePage', ['resultUpdate' => $resultUpdate]);
     }
 
+    public function actionUpdateImage() : string
+    {
+        $model         = new FormModel;
+
+        $resultUpdate  = $model->updateImage();
+
+        return $this->render('resultUpdatePage', ['resultUpdate' => $resultUpdate]);
+    }
+
+    public function actionDeleteImage() : string
+    {
+        $model         = new FormModel;
+
+        $resultDelete  = $model->deleteImage();
+
+        return $this->render('resultDeletePage', ['resultDelete' => $resultDelete, 'type' => 'image']);
+    }
+
     public function actionDeleteBook(): string
     {
         $model         = new FormModel;
 
         $resultDelete  = $model->deleteBook();
 
-        return $this->render('resultDeletePage', ['resultDelete' => $resultDelete]);
+        return $this->render('resultDeletePage', ['resultDelete' => $resultDelete, 'type' => 'book']);
     }
 }
