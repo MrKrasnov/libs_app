@@ -269,6 +269,25 @@ class FormModel extends Model
         return $resultUpdate;
     }
 
+    public function deleteCategories() : bool
+    {
+        $request = Yii::$app->request;
+
+        if (!$request->isPost) {
+            throw new BadRequestHttpException('Неправильный тип запроса');
+        }
+
+        $id         = $request->post('id');
+        $categories = $request->post('removeCategories');
+
+        if(!isset($id, $categories)) {
+            throw new InvalidArgumentException('При удалении категорий книги не получили необходимые данные');
+        }
+
+        $resultDelete = Yii::$app->DatabaseService->deleteCategoryByBookId($id, $categories);
+        return $resultDelete;
+    }
+
     public function updateAuthors() : bool
     {
         $request = Yii::$app->request;
@@ -287,6 +306,26 @@ class FormModel extends Model
         $resultUpdate = Yii::$app->DatabaseService->addAuthorsByBookById($id, $authors);
         return $resultUpdate;
     }
+
+    public function deleteAuthors() : bool
+    {
+        $request = Yii::$app->request;
+
+        if (!$request->isPost) {
+            throw new BadRequestHttpException('Неправильный тип запроса');
+        }
+
+        $id         = $request->post('id');
+        $authors    = $request->post('removeAuthors');
+
+        if(!isset($id, $authors)) {
+            throw new InvalidArgumentException('При удалении авторов книги не получили необходимые данные');
+        }
+
+        $resultDelete = Yii::$app->DatabaseService->deleteAuthorsByBookId($id, $authors);
+        return $resultDelete;
+    }
+
 
     public function deleteImage() : bool
     {

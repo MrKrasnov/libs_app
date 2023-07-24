@@ -120,6 +120,22 @@ class DatabaseService
         return true;
     }
 
+    public function deleteCategoryByBookId(int $id, array $categories) : bool
+    {
+        foreach ($categories as $categoryId) {
+            $query = new Query();
+            $query
+                ->createCommand()
+                ->delete('books_categories',
+                    [
+                        'books_id' => $id,
+                        'categories_id' => $categoryId
+                    ])
+                ->execute();
+        }
+        return true;
+    }
+
     public function addAuthorsByBookById(int $id, array $authors) : bool
     {
         foreach ($authors as $authorId) {
@@ -135,6 +151,22 @@ class DatabaseService
             if($resultInsert > 0){
                 Yii::warning('не получилось добавить автора '. $authorId . ' для книги '. $id);
             }
+        }
+        return true;
+    }
+
+    public function deleteAuthorsByBookId(int $id, array $authors) : bool
+    {
+        foreach ($authors as $authorId) {
+            $query = new Query();
+            $query
+                ->createCommand()
+                ->delete('books_authors',
+                    [
+                        'books_id' => $id,
+                        'authors_id' => $authorId
+                    ])
+                ->execute();
         }
         return true;
     }

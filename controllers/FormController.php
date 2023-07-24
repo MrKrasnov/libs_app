@@ -86,12 +86,13 @@ class FormController extends Controller
                 $resultDelete  = $model->deleteBook();
                 break;
             case "categories":
-               // $resultDelete  = $model->deleteBook();
+                $resultDelete  = $model->deleteCategories();
                 break;
             case "authors":
-               // $resultDelete  = $model->deleteBook();
+                $resultDelete  = $model->deleteAuthors();
                 break;
             default:
+                $resultDelete = false;
                 throw new InvalidArgumentException('Неправильный тип данных для удаления');
         }
 
