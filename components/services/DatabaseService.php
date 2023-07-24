@@ -120,6 +120,25 @@ class DatabaseService
         return true;
     }
 
+    public function addAuthorsByBookById(int $id, array $authors) : bool
+    {
+        foreach ($authors as $authorId) {
+            $query = new Query();
+            $resultInsert = $query
+                ->createCommand()
+                ->insert('books_authors', [
+                    'books_id' => $id,
+                    'authors_id' => $authorId,
+                ])
+                ->execute();
+
+            if($resultInsert > 0){
+                Yii::warning('не получилось добавить автора '. $authorId . ' для книги '. $id);
+            }
+        }
+        return true;
+    }
+
     public function getAllAuthors() : array
     {
         $query = new Query();

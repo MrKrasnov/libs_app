@@ -269,6 +269,25 @@ class FormModel extends Model
         return $resultUpdate;
     }
 
+    public function updateAuthors() : bool
+    {
+        $request = Yii::$app->request;
+
+        if (!$request->isPost) {
+            throw new BadRequestHttpException('Неправильный тип запроса');
+        }
+
+        $id      = $request->post('id');
+        $authors      = $request->post('addAuthors');
+
+        if(!isset($id, $authors)) {
+            throw new InvalidArgumentException('При изменении автора книги не получили необходимые данные');
+        }
+
+        $resultUpdate = Yii::$app->DatabaseService->addAuthorsByBookById($id, $authors);
+        return $resultUpdate;
+    }
+
     public function deleteImage() : bool
     {
         $request = Yii::$app->request;

@@ -65,7 +65,7 @@ class FormController extends Controller
                 $resultUpdate  = $model->updateCategories();
                 break;
             case "authors":
-               // $resultUpdate  = $model->updateImage();
+                $resultUpdate  = $model->updateAuthors();
                 break;
             default:
                 throw new InvalidArgumentException('Неправильный тип данных для обновления');
