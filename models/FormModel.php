@@ -250,6 +250,25 @@ class FormModel extends Model
         return false;
     }
 
+    public function updateCategories() : bool
+    {
+        $request = Yii::$app->request;
+
+        if (!$request->isPost) {
+            throw new BadRequestHttpException('Неправильный тип запроса');
+        }
+
+        $id      = $request->post('id');
+        $categories      = $request->post('addCategories');
+
+        if(!isset($id, $categories)) {
+            throw new InvalidArgumentException('При изменении категорий книги не получили необходимые данные');
+        }
+
+        $resultUpdate = Yii::$app->DatabaseService->addCategoriesByBookById($id, $categories);
+        return $resultUpdate;
+    }
+
     public function deleteImage() : bool
     {
         $request = Yii::$app->request;

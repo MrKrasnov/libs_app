@@ -61,6 +61,12 @@ class FormController extends Controller
             case "image":
                 $resultUpdate  = $model->updateImage();
                 break;
+            case "categories":
+                $resultUpdate  = $model->updateCategories();
+                break;
+            case "authors":
+               // $resultUpdate  = $model->updateImage();
+                break;
             default:
                 throw new InvalidArgumentException('Неправильный тип данных для обновления');
         }
@@ -78,6 +84,12 @@ class FormController extends Controller
                 break;
             case "book":
                 $resultDelete  = $model->deleteBook();
+                break;
+            case "categories":
+               // $resultDelete  = $model->deleteBook();
+                break;
+            case "authors":
+               // $resultDelete  = $model->deleteBook();
                 break;
             default:
                 throw new InvalidArgumentException('Неправильный тип данных для удаления');

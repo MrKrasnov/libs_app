@@ -101,6 +101,25 @@ class DatabaseService
         return $data;
     }
 
+    public function addCategoriesByBookById(int $id, array $categories) : bool
+    {
+        foreach ($categories as $categoryId) {
+            $query = new Query();
+            $resultInsert = $query
+                ->createCommand()
+                ->insert('books_categories', [
+                    'books_id' => $id,
+                    'categories_id' => $categoryId,
+                ])
+                ->execute();
+
+            if($resultInsert > 0){
+                Yii::warning('не получилось добавить категорию '. $categoryId . ' для книги '. $id);
+            }
+        }
+        return true;
+    }
+
     public function getAllAuthors() : array
     {
         $query = new Query();
@@ -114,7 +133,8 @@ class DatabaseService
 
     public function addAuthor(string $author) : bool
     {
-        $resultInsert = $this->query
+        $query = new Query();
+        $resultInsert = $query
             ->createCommand()
             ->insert('author', [
                 'name' => $author,

@@ -50,12 +50,14 @@ $this->title = "Update Book ".$bookData['title']." Form";
         <button type="submit" class="btn btn-danger shadow">Delete Image</button>
     </form>
 
-    <form class="mt-5" action="/form/add-categories-for-book" method="POST">
+    <form class="mt-5" action="<?= Url::to(['/form/update', 'type' => 'categories']) ?>" method="POST">
         <h3>Add Genres</h3>
         <div class="form-group">
             <div class="row">
                 <div class='col-md-6'>
                     <label>Genres:</label>
+                    <input type="hidden" name="id" value="<?= $bookData['id'] ?>">
+                    <?= Html::hiddenInput(Yii::$app->request->csrfParam, Yii::$app->request->getCsrfToken()) ?>
                     <?php
                     if(empty($categoriesNotExistBook)) {
                         echo
@@ -80,12 +82,14 @@ $this->title = "Update Book ".$bookData['title']." Form";
         <button type="submit" class="btn btn-primary shadow">Add Categories</button>
     </form>
 
-    <form class="mt-5" action="/form/add-categories-for-book" method="POST">
+    <form class="mt-5" action="<?= Url::to(['/form/delete', 'type' => 'categories']) ?>" method="POST">
         <h3>Delete Genres</h3>
         <div class="form-group">
             <div class="row">
                 <div class='col-md-6'>
                     <label>Genres:</label>
+                    <input type="hidden" name="id" value="<?= $bookData['id'] ?>">
+                    <?= Html::hiddenInput(Yii::$app->request->csrfParam, Yii::$app->request->getCsrfToken()) ?>
                     <?php
                     if(empty($categoriesBook)) {
                         echo
@@ -110,12 +114,14 @@ $this->title = "Update Book ".$bookData['title']." Form";
         <button type="submit" class="btn btn-danger shadow">Delete Categories</button>
     </form>
 
-    <form class="mt-5" action="/form/add-authors-for-book" method="POST">
+    <form class="mt-5" action="<?= Url::to(['/form/update', 'type' => 'authors']) ?>" method="POST">
         <h3>Add Authors</h3>
         <div class="form-group">
             <div class="row">
                 <div class='col-md-6'>
                     <label>Authors:</label>
+                    <input type="hidden" name="id" value="<?= $bookData['id'] ?>">
+                    <?= Html::hiddenInput(Yii::$app->request->csrfParam, Yii::$app->request->getCsrfToken()) ?>
                     <?php
                     if(empty($authorsNotExistBook)) {
                         echo
@@ -140,12 +146,14 @@ $this->title = "Update Book ".$bookData['title']." Form";
         <button type="submit" class="btn btn-primary shadow">Add Authors</button>
     </form>
 
-    <form class="mt-5" action="/form/add-authors-for-book" method="POST">
+    <form class="mt-5" action="<?= Url::to(['/form/delete', 'type' => 'authors']) ?>" method="POST">
         <h3>Delete Authors</h3>
         <div class="form-group">
             <div class="row">
                 <div class='col-md-6'>
                     <label>Authors:</label>
+                    <input type="hidden" name="id" value="<?= $bookData['id'] ?>">
+                    <?= Html::hiddenInput(Yii::$app->request->csrfParam, Yii::$app->request->getCsrfToken()) ?>
                     <?php
                     if(empty($authorsBook)) {
                         echo
