@@ -13,11 +13,10 @@ class SiteModel extends Model
         $nameSearch = $request->get('name-search');
         $category   = $request->get('category');
 
-        //TODO попробовать упростить код
        if(isset($nameSearch, $category)) {
            $booksData = $this->getBooks($nameSearch, $category);
        } else {
-            $booksData = Yii::$app->DatabaseService->getBasicDataBooks(20);
+            $booksData = Yii::$app->DatabaseService->getBasicDataBooks(16);
         }
 
         //проверим данные для книг

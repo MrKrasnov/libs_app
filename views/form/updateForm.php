@@ -5,15 +5,15 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-$this->title = "Update Book $title Form";
+$this->title = "Update Book ".$bookData['title']." Form";
 ?>
 
 <div class="container">
     <form action="<?= Url::to(['/form/update', 'type' => 'title']) ?>" method="POST">
         <h3>Change Title</h3>
         <div class="form-group">
-            <label for="title">Title - <?= $title ?></label>
-            <input type="hidden" name="id" value="<?= $id ?>">
+            <label for="title">Title - <?= $bookData['title'] ?></label>
+            <input type="hidden" name="id" value="<?= $bookData['id'] ?>">
             <input type="text" class="form-control shadow" id="title" name="title" placeholder="Enter Title" required>
         </div>
         <?= Html::hiddenInput(Yii::$app->request->csrfParam, Yii::$app->request->getCsrfToken()) ?>
@@ -24,7 +24,7 @@ $this->title = "Update Book $title Form";
         <h3>Change Description</h3>
         <div class="form-group">
             <label for="author">Description:</label>
-            <input type="hidden" name="id" value="<?= $id ?>">
+            <input type="hidden" name="id" value="<?= $bookData['id'] ?>">
             <textarea class="form-control shadow" id="bookDescription" name="description" rows="4" placeholder="Enter Description Book" required></textarea>
         </div>
         <?= Html::hiddenInput(Yii::$app->request->csrfParam, Yii::$app->request->getCsrfToken()) ?>
@@ -34,7 +34,7 @@ $this->title = "Update Book $title Form";
     <form class="mt-5" action="<?= Url::to(['/form/update', 'type' => 'image']) ?>" method="POST" enctype="multipart/form-data">
         <h3>Change Image</h3>
         <div class="mb-3">
-            <input type="hidden" name="id" value="<?= $id ?>">
+            <input type="hidden" name="id" value="<?= $bookData['id'] ?>">
             <input type="file" class="form-control-file" id="img" name="img" required>
             <?= Html::hiddenInput(Yii::$app->request->csrfParam, Yii::$app->request->getCsrfToken()) ?>
         </div>
@@ -44,37 +44,35 @@ $this->title = "Update Book $title Form";
     <form class="mt-5" action="<?= Url::to(['/form/delete', 'type' => 'image']) ?>" method="POST">
         <h3>Delete Image</h3>
         <div class="mb-3">
-            <input type="hidden" name="id" value="<?= $id ?>">
+            <input type="hidden" name="id" value="<?= $bookData['id'] ?>">
             <?= Html::hiddenInput(Yii::$app->request->csrfParam, Yii::$app->request->getCsrfToken()) ?>
         </div>
         <button type="submit" class="btn btn-danger shadow">Delete Image</button>
     </form>
 
     <form class="mt-5" action="/form/add-categories-for-book" method="POST">
-        <h3>Add Categories</h3>
+        <h3>Add Genres</h3>
         <div class="form-group">
             <div class="row">
                 <div class='col-md-6'>
-                    <label>Categories:</label>
+                    <label>Genres:</label>
                     <?php
-                    /*
-                    if(empty($categories)) {
+                    if(empty($categoriesNotExistBook)) {
                         echo
                         '
                                 <div class="alert alert-danger mt-3 shadow">
-                                  You need to add a category
+                                  error get categories
                                 </div>
-                                ';
+                            ';
                     } else {
-                        echo "<select class='form-control col-md-6 shadow' name='categories[]' multiple required>";
-                        foreach ($categories as $category) {
+                        echo "<select class='form-control col-md-6 shadow' name='addCategories[]' multiple required>";
+                        foreach ($categoriesNotExistBook as $category) {
                             $value = $category['name'];
                             $id    = $category['id'];
                             echo "<option value='$id'>$value</option>";
                         }
                         echo "</select>";
                     }
-                    */
                     ?>
                 </div>
             </div>
@@ -83,30 +81,28 @@ $this->title = "Update Book $title Form";
     </form>
 
     <form class="mt-5" action="/form/add-categories-for-book" method="POST">
-        <h3>Delete Categories</h3>
+        <h3>Delete Genres</h3>
         <div class="form-group">
             <div class="row">
                 <div class='col-md-6'>
-                    <label>Categories:</label>
+                    <label>Genres:</label>
                     <?php
-                    /*
-                    if(empty($categories)) {
+                    if(empty($categoriesBook)) {
                         echo
                         '
                                 <div class="alert alert-danger mt-3 shadow">
-                                  You need to add a category
+                                  error get categories
                                 </div>
-                                ';
+                            ';
                     } else {
-                        echo "<select class='form-control col-md-6 shadow' name='categories[]' multiple required>";
-                        foreach ($categories as $category) {
+                        echo "<select class='form-control col-md-6 shadow' name='removeCategories[]' multiple required>";
+                        foreach ($categoriesBook as $category) {
                             $value = $category['name'];
                             $id    = $category['id'];
                             echo "<option value='$id'>$value</option>";
                         }
                         echo "</select>";
                     }
-                    */
                     ?>
                 </div>
             </div>
@@ -121,24 +117,22 @@ $this->title = "Update Book $title Form";
                 <div class='col-md-6'>
                     <label>Authors:</label>
                     <?php
-                    /*
-                    if(empty($categories)) {
+                    if(empty($authorsNotExistBook)) {
                         echo
                         '
                                 <div class="alert alert-danger mt-3 shadow">
-                                  You need to add a category
+                                  error get authors
                                 </div>
-                                ';
+                            ';
                     } else {
-                        echo "<select class='form-control col-md-6 shadow' name='categories[]' multiple required>";
-                        foreach ($categories as $category) {
-                            $value = $category['name'];
-                            $id    = $category['id'];
+                        echo "<select class='form-control col-md-6 shadow' name='addAuthors[]' multiple required>";
+                        foreach ($authorsNotExistBook as $author) {
+                            $value = $author['name'];
+                            $id    = $author['id'];
                             echo "<option value='$id'>$value</option>";
                         }
                         echo "</select>";
                     }
-                    */
                     ?>
                 </div>
             </div>
@@ -153,24 +147,22 @@ $this->title = "Update Book $title Form";
                 <div class='col-md-6'>
                     <label>Authors:</label>
                     <?php
-                    /*
-                    if(empty($categories)) {
+                    if(empty($authorsBook)) {
                         echo
                         '
                                 <div class="alert alert-danger mt-3 shadow">
-                                  You need to add a category
+                                  error get authors
                                 </div>
-                                ';
+                            ';
                     } else {
-                        echo "<select class='form-control col-md-6 shadow' name='categories[]' multiple required>";
-                        foreach ($categories as $category) {
-                            $value = $category['name'];
-                            $id    = $category['id'];
+                        echo "<select class='form-control col-md-6 shadow' name='removeAuthors[]' multiple required>";
+                        foreach ($authorsBook as $author) {
+                            $value = $author['name'];
+                            $id    = $author['id'];
                             echo "<option value='$id'>$value</option>";
                         }
                         echo "</select>";
                     }
-                    */
                     ?>
                 </div>
             </div>

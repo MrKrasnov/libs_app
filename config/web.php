@@ -1,5 +1,6 @@
 <?php
 
+use app\components\helpers\ArrayHelper;
 use yii\log\FileTarget;
 use yii\caching\FileCache;
 use app\components\services\FileService;
@@ -49,6 +50,9 @@ $config = [
         ],
         'FileService' => [
             'class' => FileService::class,
+        ],
+        'ArrayHelper' => [
+            'class' => ArrayHelper::class,
         ]
     ],
     'params' => $params,

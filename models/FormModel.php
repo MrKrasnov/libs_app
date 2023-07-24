@@ -15,7 +15,7 @@ class FormModel extends Model
     public function getCategoryAndAuthors() : array
     {
         $allAuthors  = Yii::$app->DatabaseService->getAllAuthors();
-        $allCategory = Yii::$app->DatabaseService->getAllCategory();
+        $allCategory = Yii::$app->DatabaseService->getAllCategories();
 
         return [
             'authors'   => $allAuthors,
@@ -147,11 +147,19 @@ class FormModel extends Model
             throw new InvalidArgumentException('Не пришел id книги');
         }
 
-        $bookData = Yii::$app->DatabaseService->getDataBookById($id);
+        $bookData      = Yii::$app->DatabaseService->getDataBookById($id);
 
         if($bookData === false) {
             throw new InvalidConfigException('Книга с указанным идентификатором не найдена.');
         }
+
+        $allCategories = Yii::$app->DatabaseService->getAllCategories();
+        $allAuthors    = Yii::$app->DatabaseService->getAllAuthors();
+
+        $authorsBook = Yii::$app->DatabaseService->getAuthorsByBookId($id);
+        $authorsNotExistBook = Yii::$app->ArrayHelper->removeDublicateValuesFromArrays($allAuthors, $authorsBook, 'name');
+        $categoriesBook = Yii::$app->DatabaseService->getCategoriesByBookId($id);
+        $categoriesNotExistBook = Yii::$app->ArrayHelper->removeDublicateValuesFromArrays($allCategories, $categoriesBook, 'name');
 
         $img        = $bookData['img'] ?? null;
 
@@ -161,7 +169,13 @@ class FormModel extends Model
             $bookData['img'] = "img/no-available.jpg";
         }
 
-        return $bookData;
+        return [
+            'bookData' => $bookData,
+            'authorsBook'=> $authorsBook,
+            'authorsNotExistBook' => $authorsNotExistBook,
+            'categoriesBook' => $categoriesBook,
+            'categoriesNotExistBook' => $categoriesNotExistBook
+        ];
     }
 
     public function updateTitle() : bool

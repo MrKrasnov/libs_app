@@ -64,8 +64,16 @@ class DatabaseService
 
     public function getCategoriesByBookId($bookId) : array
     {
+        $query = new Query();
+        $data  = $query
+            ->select('category.*')
+            ->from('book')
+            ->join('INNER JOIN', 'books_categories', 'book.id = books_categories.books_id')
+            ->join('INNER JOIN', 'category', 'books_categories.categories_id = category.id')
+            ->where(['book.id' => $bookId])
+            ->all();
 
-        return [];
+        return $data;
     }
 
     public function getAllCategories() : array
@@ -79,10 +87,18 @@ class DatabaseService
         return $data;
     }
 
-    public function getAuthorsByBookId($bookId) : array
+    public function getAuthorsByBookId(int $bookId) : array
     {
+        $query = new Query();
+        $data  = $query
+            ->select('author.*')
+            ->from('book')
+            ->join('INNER JOIN', 'books_authors', 'book.id = books_authors.books_id')
+            ->join('INNER JOIN', 'author', 'books_authors.authors_id = author.id')
+            ->where(['book.id' => $bookId])
+            ->all();
 
-        return [];
+        return $data;
     }
 
     public function getAllAuthors() : array
