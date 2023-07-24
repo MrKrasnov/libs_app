@@ -11,21 +11,16 @@ use yii\db\Query;
 
 class DatabaseService
 {
-    public Query $query;
-
-    public function __construct()
-    {
-        $this->query = new Query();
-    }
-
     public function getDataBookById(int $id)
     {
-        $data = $this->query
+        $query = new Query();
+        $data  = $query
             ->select('*')
             ->from('book')
             ->where(['id' => $id])
             ->andWhere(['deleted_at' => null])
             ->one();
+
         return $data;
     }
 
@@ -43,7 +38,8 @@ class DatabaseService
             $arrayWhere = $this->getWhereFromFilter($filter);
         }
 
-        $data = $this->query
+        $query = new Query();
+        $data  = $query
             ->select([
                 'book.id AS book_id',
                 'book.title',
@@ -66,9 +62,16 @@ class DatabaseService
         return $data;
     }
 
-    public function getAllCategory() : array
+    public function getCategoriesByBookId($bookId) : array
     {
-        $data = $this->query
+
+        return [];
+    }
+
+    public function getAllCategories() : array
+    {
+        $query = new Query();
+        $data  = $query
             ->select('*')
             ->from('category')
             ->all();
@@ -76,9 +79,16 @@ class DatabaseService
         return $data;
     }
 
+    public function getAuthorsByBookId($bookId) : array
+    {
+
+        return [];
+    }
+
     public function getAllAuthors() : array
     {
-        $data = $this->query
+        $query = new Query();
+        $data  = $query
             ->select('*')
             ->from('author')
             ->all();
@@ -100,7 +110,8 @@ class DatabaseService
 
     public function addCategory(string $category) : bool
     {
-        $resultInsert = $this->query
+        $query = new Query();
+        $resultInsert = $query
             ->createCommand()
             ->insert('category', [
                 'name' => $category,
