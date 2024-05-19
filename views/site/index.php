@@ -11,7 +11,7 @@ $this->title = 'Library';
         <div class="col-md-12">
             <form action="/site/index" class="form-inline">
                 <div class="form-group row">
-                    <div class="col-md-9">
+                    <div class="col-md-8 mb-1">
                         <input type="text" name='name-search'
                                value="<?php
                                $request = Yii::$app->request;
@@ -21,14 +21,14 @@ $this->title = 'Library';
                                class="form-control shadow" id="searchInput"
                                placeholder="Type in the name" required>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-3 mb-1">
                         <select name="category" class="form-control selectpicker shadow" data-live-search="true">
                             <option>Name Book</option>
                             <option>Genre</option>
                             <option>Author</option>
                         </select>
                     </div>
-                    <div class="col-md-1">
+                    <div class="col-md-1 mb-1">
                         <button id="submit-search" type="submit" class="btn btn-primary shadow">Search</button>
                     </div>
                 </div>
@@ -58,7 +58,7 @@ function renderBookCards(array $booksData) : string
 
         $booksCards .=
         "
-        <div class='col-md-3 mb-4'>
+        <div class='col-xl-3 col-lg-4 col-md-6 col-12 mb-2'>
             <div class='card shadow'>
                 <div class='card-body'>
                     <h5 class='card-title'>$title</h5>
